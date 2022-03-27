@@ -1,0 +1,326 @@
+Enter password: ************
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 32
+Server version: 8.0.28 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++------------------------+
+| Database               |
++------------------------+
+| abc                    |
+| address_book_services  |
+| employeepayrollservice |
+| information_schema     |
+| mysql                  |
+| payroll_service        |
+| payroll_services       |
+| performance_schema     |
+| sys                    |
++------------------------+
+9 rows in set (0.19 sec)
+
+mysql> use address_book_services;
+Database changed
+mysql> create table addressbook (id int not null auto_increment, FirstName char(20) not null, LastName char(20) not null, Address char(50) not null, city char(10) not null, State char(10) not null, ZipCode varchar(10) not null, PhoneNum varchar(10) not null, Email varchar(50) not null);
+ERROR 1075 (42000): Incorrect table definition; there can be only one auto column and it must be defined as a key
+mysql> create table addressbook (FirstName char(20) not null, LastName char(20) not null, Address char(50) not null, city char(10) not null, State char(10) not null, ZipCode varchar(10) not null, PhoneNum varchar(10) not null, Email varchar(50) not null);
+Query OK, 0 rows affected (0.67 sec)
+
+mysql> desc addressbook;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| FirstName | char(20)    | NO   |     | NULL    |       |
+| LastName  | char(20)    | NO   |     | NULL    |       |
+| Address   | char(50)    | NO   |     | NULL    |       |
+| city      | char(10)    | NO   |     | NULL    |       |
+| State     | char(10)    | NO   |     | NULL    |       |
+| ZipCode   | varchar(10) | NO   |     | NULL    |       |
+| PhoneNum  | varchar(10) | NO   |     | NULL    |       |
+| Email     | varchar(50) | NO   |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+8 rows in set (0.10 sec)
+
+
+mysql> create table addressbooks (id int auto_increment not null, FirstName varchar(20) not null, LastName varchar(20) not null, Address varchar(50) not null, city varchar(10) not null, State varchar(10) not null, ZipCode varchar(10) not null, PhoneNum varchar(10) not null, Email varchar(50) not null,primary key(id));
+Query OK, 0 rows affected (0.69 sec)
+
+mysql> select * from addressbooks;
+Empty set (0.36 sec)
+
+mysql> create table addressbooks (id int auto_increment not null, FirstName varchar(20) not null, LastName varchar(20) not null, Address varchar(50) not null, city varchar(10) not null, State varchar(10) not null, ZipCode varchar(10) not null, PhoneNum varchar(10) not null, Email varchar(50) not null,primary key(id));
+ERROR 1050 (42S01): Table 'addressbooks' already exists
+mysql> desc addressbooks;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| id        | int         | NO   | PRI | NULL    | auto_increment |
+| FirstName | varchar(20) | NO   |     | NULL    |                |
+| LastName  | varchar(20) | NO   |     | NULL    |                |
+| Address   | varchar(50) | NO   |     | NULL    |                |
+| city      | varchar(10) | NO   |     | NULL    |                |
+| State     | varchar(10) | NO   |     | NULL    |                |
+| ZipCode   | varchar(10) | NO   |     | NULL    |                |
+| PhoneNum  | varchar(10) | NO   |     | NULL    |                |
+| Email     | varchar(50) | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+9 rows in set (0.11 sec)
+
+mysql> insert into addressbooks(FirstName, LastName, Address, City, State, ZipCode, PhoneNum, Email) values('ChandraKant','Prasad','Rly colony','Bokaro','Jharkhand','827010','7070452010','chandrakant25@outlook.com');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from addressbooks;
++----+-------------+----------+------------+--------+-----------+---------+------------+---------------------------+
+| id | FirstName   | LastName | Address    | city   | State     | ZipCode | PhoneNum   | Email                     |
++----+-------------+----------+------------+--------+-----------+---------+------------+---------------------------+
+|  1 | ChandraKant | Prasad   | Rly colony | Bokaro | Jharkhand | 827010  | 7070452010 | chandrakant25@outlook.com |
++----+-------------+----------+------------+--------+-----------+---------+------------+---------------------------+
+1 row in set (0.04 sec)
+
+mysql> insert into addressbooks(FirstName, LastName, Address, City, State, ZipCode, PhoneNum, Email) values('Anand','Singh','Lalpur','Ranchi','Jharkhand','7603001','7925164578','anandcse1440@gmail.com');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into addressbooks(FirstName, LastName, Address, City, State, ZipCode, PhoneNum, Email) values('Aman','Patel','Kadma','Jamshedpur','Jharkhand','560057','8877995544','patelaman45@rediffmail.com');   com');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from addressbooks;
++----+-------------+----------+------------+------------+-----------+---------+------------+----------------------------+
+| id | FirstName   | LastName | Address    | city       | State     | ZipCode | PhoneNum   | Email                      |
++----+-------------+----------+------------+------------+-----------+---------+------------+----------------------------+
+|  1 | ChandraKant | Prasad   | Rly colony | Bokaro     | Jharkhand | 827010  | 7070452010 | chandrakant25@outlook.com  |
+|  2 | Anand       | Singh    | Lalpur     | Ranchi     | Jharkhand | 7603001 | 7925164578 | anandcse1440@gmail.com     |
+|  3 | Aman        | Patel    | Kadma      | Jamshedpur | Jharkhand | 560057  | 8877995544 | patelaman45@rediffmail.com |
++----+-------------+----------+------------+------------+-----------+---------+------------+----------------------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into addressbooks(FirstName, LastName, Address, City, State, ZipCode, PhoneNum, Email) values('Minakshi','Singh','Sec-13','Dwarka','New-Delhi','415486','8877456512','minakshisingh17@hotmail.com');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> select * from addressbooks;
++----+-------------+----------+------------+------------+-----------+---------+------------+-----------------------------+
+| id | FirstName   | LastName | Address    | city       | State     | ZipCode | PhoneNum   | Email                       |
++----+-------------+----------+------------+------------+-----------+---------+------------+-----------------------------+
+|  1 | ChandraKant | Prasad   | Rly colony | Bokaro     | Jharkhand | 827010  | 7070452010 | chandrakant25@outlook.com   |
+|  2 | Anand       | Singh    | Lalpur     | Ranchi     | Jharkhand | 7603001 | 7925164578 | anandcse1440@gmail.com      |
+|  3 | Aman        | Patel    | Kadma      | Jamshedpur | Jharkhand | 560057  | 8877995544 | patelaman45@rediffmail.com  |
+|  4 | Minakshi    | Singh    | Sec-13     | Dwarka     | New-Delhi | 415486  | 8877456512 | minakshisingh17@hotmail.com |
++----+-------------+----------+------------+------------+-----------+---------+------------+-----------------------------+
+4 rows in set (0.04 sec)
+
+mysql> select LastName from addressbooks ORDER BY LastName;
++----------+
+| LastName |
++----------+
+| Patel    |
+| Prasad   |
+| Singh    |
+| Singh    |
++----------+
+4 rows in set (0.00 sec)
+
+mysql> select State from addressbooks ORDER BY State;
++-----------+
+| State     |
++-----------+
+| Jharkhand |
+| Jharkhand |
+| Jharkhand |
+| New-Delhi |
++-----------+
+4 rows in set (0.00 sec)
+
+mysql> Alter table addressbooks add Contact_Type char(100);
+Query OK, 0 rows affected (1.34 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from addressbooks;
++----+-------------+----------+------------+------------+-----------+---------+------------+-----------------------------+--------------+
+| id | FirstName   | LastName | Address    | city       | State     | ZipCode | PhoneNum   | Email                       | Contact_Type |
++----+-------------+----------+------------+------------+-----------+---------+------------+-----------------------------+--------------+
+|  1 | ChandraKant | Prasad   | Rly colony | Bokaro     | Jharkhand | 827010  | 7070452010 | chandrakant25@outlook.com   | NULL         |
+|  2 | Anand       | Singh    | Lalpur     | Ranchi     | Jharkhand | 7603001 | 7925164578 | anandcse1440@gmail.com      | NULL         |
+|  3 | Aman        | Patel    | Kadma      | Jamshedpur | Jharkhand | 560057  | 8877995544 | patelaman45@rediffmail.com  | NULL         |
+|  4 | Minakshi    | Singh    | Sec-13     | Dwarka     | New-Delhi | 415486  | 8877456512 | minakshisingh17@hotmail.com | NULL         |
++----+-------------+----------+------------+------------+-----------+---------+------------+-----------------------------+--------------+
+4 rows in set (0.06 sec)
+
+mysql> Update addressbooks set Contact_Type ='Friends' where id = 3;
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressbooks;
++----+-------------+----------+------------+------------+-----------+---------+------------+-----------------------------+--------------+
+| id | FirstName   | LastName | Address    | city       | State     | ZipCode | PhoneNum   | Email                       | Contact_Type |
++----+-------------+----------+------------+------------+-----------+---------+------------+-----------------------------+--------------+
+|  1 | ChandraKant | Prasad   | Rly colony | Bokaro     | Jharkhand | 827010  | 7070452010 | chandrakant25@outlook.com   | NULL         |
+|  2 | Anand       | Singh    | Lalpur     | Ranchi     | Jharkhand | 7603001 | 7925164578 | anandcse1440@gmail.com      | NULL         |
+|  3 | Aman        | Patel    | Kadma      | Jamshedpur | Jharkhand | 560057  | 8877995544 | patelaman45@rediffmail.com  | Friends      |
+|  4 | Minakshi    | Singh    | Sec-13     | Dwarka     | New-Delhi | 415486  | 8877456512 | minakshisingh17@hotmail.com | NULL         |
++----+-------------+----------+------------+------------+-----------+---------+------------+-----------------------------+--------------+
+4 rows in set (0.00 sec)
+
+mysql> Update addressbooks set Contact_Type ='Brother' where id = 2;
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> Update addressbooks set Contact_Type ='Best Friend' where id = 4;
+Query OK, 1 row affected (0.11 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> Update addressbooks set Contact_Type ='Friend' where id = 1;
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressbooks;
++----+-------------+----------+------------+------------+-----------+---------+------------+-----------------------------+--------------+
+| id | FirstName   | LastName | Address    | city       | State     | ZipCode | PhoneNum   | Email                       | Contact_Type |
++----+-------------+----------+------------+------------+-----------+---------+------------+-----------------------------+--------------+
+|  1 | ChandraKant | Prasad   | Rly colony | Bokaro     | Jharkhand | 827010  | 7070452010 | chandrakant25@outlook.com   | Friend       |
+|  2 | Anand       | Singh    | Lalpur     | Ranchi     | Jharkhand | 7603001 | 7925164578 | anandcse1440@gmail.com      | Brother      |
+|  3 | Aman        | Patel    | Kadma      | Jamshedpur | Jharkhand | 560057  | 8877995544 | patelaman45@rediffmail.com  | Friends      |
+|  4 | Minakshi    | Singh    | Sec-13     | Dwarka     | New-Delhi | 415486  | 8877456512 | minakshisingh17@hotmail.com | Best Friend  |
++----+-------------+----------+------------+------------+-----------+---------+------------+-----------------------------+--------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into addressbooks(FirstName, LastName, Address, City, State, ZipCode, PhoneNum, Email) values('Payal','Pandey','Sec-18','Noida','New-Delhi','415468','7768115798','pp3453@yahoo.com','Friends');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into addressbooks(FirstName, LastName, Address, City, State, ZipCode, PhoneNum, Email) values('Payal','Pandey','Sec-18','Noida','New-Delhi','415468','7768115798','pp3453@yahoo.com');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from addressbooks;
++----+-------------+----------+------------+------------+-----------+---------+------------+-----------------------------+--------------+
+| id | FirstName   | LastName | Address    | city       | State     | ZipCode | PhoneNum   | Email                       | Contact_Type |
++----+-------------+----------+------------+------------+-----------+---------+------------+-----------------------------+--------------+
+|  1 | ChandraKant | Prasad   | Rly colony | Bokaro     | Jharkhand | 827010  | 7070452010 | chandrakant25@outlook.com   | Friend       |
+|  2 | Anand       | Singh    | Lalpur     | Ranchi     | Jharkhand | 7603001 | 7925164578 | anandcse1440@gmail.com      | Brother      |
+|  3 | Aman        | Patel    | Kadma      | Jamshedpur | Jharkhand | 560057  | 8877995544 | patelaman45@rediffmail.com  | Friends      |
+|  4 | Minakshi    | Singh    | Sec-13     | Dwarka     | New-Delhi | 415486  | 8877456512 | minakshisingh17@hotmail.com | Best Friend  |
+|  5 | Payal       | Pandey   | Sec-18     | Noida      | New-Delhi | 415468  | 7768115798 | pp3453@yahoo.com            | NULL         |
++----+-------------+----------+------------+------------+-----------+---------+------------+-----------------------------+--------------+
+5 rows in set (0.01 sec)
+
+mysql> Delete from addressbooks
+    -> where FirstName = 'Aman';
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select * from addressbooks;
++----+-------------+----------+------------+--------+-----------+---------+------------+-----------------------------+--------------+
+| id | FirstName   | LastName | Address    | city   | State     | ZipCode | PhoneNum   | Email                       | Contact_Type |
++----+-------------+----------+------------+--------+-----------+---------+------------+-----------------------------+--------------+
+|  1 | ChandraKant | Prasad   | Rly colony | Bokaro | Jharkhand | 827010  | 7070452010 | chandrakant25@outlook.com   | Friend       |
+|  2 | Anand       | Singh    | Lalpur     | Ranchi | Jharkhand | 7603001 | 7925164578 | anandcse1440@gmail.com      | Brother      |
+|  4 | Minakshi    | Singh    | Sec-13     | Dwarka | New-Delhi | 415486  | 8877456512 | minakshisingh17@hotmail.com | Best Friend  |
+|  5 | Payal       | Pandey   | Sec-18     | Noida  | New-Delhi | 415468  | 7768115798 | pp3453@yahoo.com            | NULL         |
++----+-------------+----------+------------+--------+-----------+---------+------------+-----------------------------+--------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from addressbooks
+    -> where City = 'Ranchi';
++----+-----------+----------+---------+--------+-----------+---------+------------+------------------------+--------------+
+| id | FirstName | LastName | Address | city   | State     | ZipCode | PhoneNum   | Email                  | Contact_Type |
++----+-----------+----------+---------+--------+-----------+---------+------------+------------------------+--------------+
+|  2 | Anand     | Singh    | Lalpur  | Ranchi | Jharkhand | 7603001 | 7925164578 | anandcse1440@gmail.com | Brother      |
++----+-----------+----------+---------+--------+-----------+---------+------------+------------------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> select * from addressbooks
+    -> where State = 'New-Delhi';
++----+-----------+----------+---------+--------+-----------+---------+------------+-----------------------------+--------------+
+| id | FirstName | LastName | Address | city   | State     | ZipCode | PhoneNum   | Email                       | Contact_Type |
++----+-----------+----------+---------+--------+-----------+---------+------------+-----------------------------+--------------+
+|  4 | Minakshi  | Singh    | Sec-13  | Dwarka | New-Delhi | 415486  | 8877456512 | minakshisingh17@hotmail.com | Best Friend  |
+|  5 | Payal     | Pandey   | Sec-18  | Noida  | New-Delhi | 415468  | 7768115798 | pp3453@yahoo.com            | NULL         |
++----+-----------+----------+---------+--------+-----------+---------+------------+-----------------------------+--------------+
+2 rows in set (0.00 sec)
+
+mysql> select Count(*) from addressbooks where City = 'New-Delhi';
++----------+
+| Count(*) |
++----------+
+|        0 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select Count(*) from addressbooks where City = 'Noida';
++----------+
+| Count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select Count(*) from addressbooks where State = 'New-Delhi';
++----------+
+| Count(*) |
++----------+
+|        2 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select * from addressbooks
+    -> where FirstName like 'A%';
++----+-----------+----------+---------+--------+-----------+---------+------------+------------------------+--------------+
+| id | FirstName | LastName | Address | city   | State     | ZipCode | PhoneNum   | Email                  | Contact_Type |
++----+-----------+----------+---------+--------+-----------+---------+------------+------------------------+--------------+
+|  2 | Anand     | Singh    | Lalpur  | Ranchi | Jharkhand | 7603001 | 7925164578 | anandcse1440@gmail.com | Brother      |
++----+-----------+----------+---------+--------+-----------+---------+------------+------------------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> select * from addressbooks
+    -> where FirstName like 'C%';
++----+-------------+----------+------------+--------+-----------+---------+------------+---------------------------+--------------+
+| id | FirstName   | LastName | Address    | city   | State     | ZipCode | PhoneNum   | Email                     | Contact_Type |
++----+-------------+----------+------------+--------+-----------+---------+------------+---------------------------+--------------+
+|  1 | ChandraKant | Prasad   | Rly colony | Bokaro | Jharkhand | 827010  | 7070452010 | chandrakant25@outlook.com | Friend       |
++----+-------------+----------+------------+--------+-----------+---------+------------+---------------------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> select * from addressbooks
+    -> where City like 'B%';
++----+-------------+----------+------------+--------+-----------+---------+------------+---------------------------+--------------+
+| id | FirstName   | LastName | Address    | city   | State     | ZipCode | PhoneNum   | Email                     | Contact_Type |
++----+-------------+----------+------------+--------+-----------+---------+------------+---------------------------+--------------+
+|  1 | ChandraKant | Prasad   | Rly colony | Bokaro | Jharkhand | 827010  | 7070452010 | chandrakant25@outlook.com | Friend       |
++----+-------------+----------+------------+--------+-----------+---------+------------+---------------------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> select Count(PhoneNum)
+    -> from addressbooks
+    -> where City = 'Bokaro';
++-----------------+
+| Count(PhoneNum) |
++-----------------+
+|               1 |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select Count(PhoneNum)
+    -> from addressbooks
+    -> where State = 'Jharkhand';
++-----------------+
+| Count(PhoneNum) |
++-----------------+
+|               2 |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select * from addressbooks;
++----+-------------+----------+------------+--------+-----------+---------+------------+-----------------------------+--------------+
+| id | FirstName   | LastName | Address    | city   | State     | ZipCode | PhoneNum   | Email                       | Contact_Type |
++----+-------------+----------+------------+--------+-----------+---------+------------+-----------------------------+--------------+
+|  1 | ChandraKant | Prasad   | Rly colony | Bokaro | Jharkhand | 827010  | 7070452010 | chandrakant25@outlook.com   | Friend       |
+|  2 | Anand       | Singh    | Lalpur     | Ranchi | Jharkhand | 7603001 | 7925164578 | anandcse1440@gmail.com      | Brother      |
+|  4 | Minakshi    | Singh    | Sec-13     | Dwarka | New-Delhi | 415486  | 8877456512 | minakshisingh17@hotmail.com | Best Friend  |
+|  5 | Payal       | Pandey   | Sec-18     | Noida  | New-Delhi | 415468  | 7768115798 | pp3453@yahoo.com            | NULL         |
++----+-------------+----------+------------+--------+-----------+---------+------------+-----------------------------+--------------+
+4 rows in set (0.00 sec)
+
+mysql>
